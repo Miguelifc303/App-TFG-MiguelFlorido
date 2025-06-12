@@ -58,9 +58,13 @@
                                     <td><?php echo $u["telefono"];?></td>
                                     <td><?php echo $u["rol"];?></td>
                                     <td>
-                                        <a href="modulo_usuarios_edit.php?id=<?php echo $u["id1"];?>"><i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                                        <a href="modulo_usuarios_edit.php?id=<?php echo $u["id1"];?>" class="btn btn-info btn-sm">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
                                         &nbsp;&nbsp;
-                                        <a href="#" data-id="<?php echo $u["id1"];?>" class="borrar"><i class="fa-solid fa-trash text-danger fa-2x"></i></a>
+                                        <a href="#" data-id="<?php echo $u["id1"];?>" class="btn btn-danger btn-sm borrar">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             <?php
