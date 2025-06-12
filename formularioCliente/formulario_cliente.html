@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Solicitud de Cita</title>
+
+    <!-- Incluye Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Iconos de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Solicitud de Cita</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="procesar_formulario_cliente.php">
+                            <!-- Información del Cliente y Vehículo en 2 columnas -->
+                            <div class="row">
+                                <!-- Columna de Información del Cliente -->
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Información del Cliente</h5>
+
+                                    <div class="mb-3">
+                                        <label for="nombre" class="form-label">Nombre:</label>
+                                        <span id="nombre_error" class="text-danger"></span>
+                                        <input type="text" name="nombre" id="nombre" required class="form-control" placeholder="Introduce tu nombre">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Correo electrónico:</label>
+                                         <span id="email_error" class="text-danger"></span>
+                                        <input type="email" name="email" id="email" required class="form-control" placeholder="Introduce tu correo electrónico">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="telefono" class="form-label">Teléfono:</label>
+                                        <span id="telefono_error" class="text-danger"></span>
+                                        <input type="tel" name="telefono" id="telefono" required class="form-control" placeholder="Introduce tu teléfono">
+                                    </div>
+                                </div>
+
+                                <!-- Columna de Información del Vehículo -->
+                                <div class="col-md-6">
+                                    <h5 class="mb-3">Información del Vehículo</h5>
+
+                                    <div class="mb-3">
+                                        <label for="marca" class="form-label">Marca del vehículo:</label>
+                                        <span id="marca_error" class="text-danger"></span>
+                                        <input type="text" name="marca" id="marca" required class="form-control" placeholder="Introduce la marca del vehículo">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="modelo" class="form-label">Modelo del vehículo:</label>
+                                       <span id="modelo_error" class="text-danger"></span>
+                                        <input type="text" name="modelo" id="modelo" required class="form-control" placeholder="Introduce el modelo del vehículo">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="anio" class="form-label">Año del vehículo:</label>
+                                       <span id="anio_error" class="text-danger"></span>
+                                        <input type="number" name="anio" id="anio" required class="form-control" placeholder="Introduce el año del vehículo">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="matricula" class="form-label">Matrícula del vehículo:</label>
+                                        <span id="matricula_error" class="text-danger"></span>
+                                        <input type="text" name="matricula" id="matricula" required class="form-control" placeholder="Introduce la matrícula del vehículo">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Detalles de la Solicitud -->
+                            <h5 class="mb-3">Detalles de la Solicitud</h5>
+
+                            <div class="mb-3">
+                                <label for="fecha_solicitada" class="form-label">Fecha solicitada:</label>
+                                <span id="fecha_solicitada_error" class="text-danger"></span>
+                                <input type="datetime-local" name="fecha_solicitada" id="fecha_solicitada" required class="form-control">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="descripcion_cliente" class="form-label">Descripción de la solicitud:</label>
+                                <span id="descripcion_cliente_error" class="text-danger"></span>
+                                <textarea name="descripcion_cliente" id="descripcion_cliente" rows="4" class="form-control" placeholder="Describe el motivo de tu solicitud" required></textarea>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="form-control btn btn-primary" id="btnform1">Enviar Solicitud</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Incluye Bootstrap JS y Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</body>
+
+</html>
+<!-- Agrega jQuery antes de tu script -->
+
+
+<script>
+    $(document).ready(function () {
+        $("#btnform1").click(function () {
+            let error = 0;
+
+            // Obtener valores
+            let nombre = $("#nombre").val().trim();
+            let email = $("#email").val().trim();
+            let telefono = $("#telefono").val().trim();
+            let marca = $("#marca").val().trim();
+            let modelo = $("#modelo").val().trim();
+            let anio = $("#anio").val().trim();
+            let matricula = $("#matricula").val().trim();
+            let fecha_solicitada = $("#fecha_solicitada").val().trim();
+            let descripcion_cliente = $("#descripcion_cliente").val().trim();
+
+            // Limpiar errores anteriores
+            $(".text-danger").html("");
+            $(".form-control").removeClass("borderError");
+
+            // Validaciones
+            if (nombre === "") {
+                error = 1;
+                $("#nombre_error").html("Debe introducir un nombre");
+                $("#nombre").addClass("borderError");
+            }
+            if (email === "") {
+                error = 1;
+                $("#email_error").html("Debe introducir un email");
+                $("#email").addClass("borderError");
+            }
+            if (telefono === "") {
+                error = 1;
+                $("#telefono_error").html("Debe introducir un teléfono");
+                $("#telefono").addClass("borderError");
+            }
+            if (marca === "") {
+                error = 1;
+                $("#marca_error").html("Debe introducir una marca");
+                $("#marca").addClass("borderError");
+            }
+            if (modelo === "") {
+                error = 1;
+                $("#modelo_error").html("Debe introducir un modelo");
+                $("#modelo").addClass("borderError");
+            }
+            if (anio === "") {
+                error = 1;
+                $("#anio_error").html("Debe introducir un año");
+                $("#anio").addClass("borderError");
+            }
+            if (matricula === "") {
+                error = 1;
+                $("#matricula_error").html("Debe introducir una matrícula");
+                $("#matricula").addClass("borderError");
+            }
+            if (fecha_solicitada === "") {
+                error = 1;
+                $("#fecha_solicitada_error").html("Debe introducir una fecha");
+                $("#fecha_solicitada").addClass("borderError");
+            }
+            if (descripcion_cliente === "") {
+                error = 1;
+                $("#descripcion_cliente_error").html("Debe introducir una descripción");
+                $("#descripcion_cliente").addClass("borderError");
+            }
+
+            // Enviar si no hay errores
+            if (error === 0) {
+                $("form").submit();
+            }
+        });
+    });
+</script>
+
+
+

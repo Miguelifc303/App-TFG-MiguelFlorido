@@ -1,0 +1,15 @@
+.charts-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  padding-top: 30px;
+  max-width: 100%; /* para que no crezca más que el contenedor padre */
+  flex-wrap: wrap; /* que se adapte en pantallas pequeñas */
+}
+
+.chart-box {
+  flex:45%; /* que ocupe casi la mitad, adaptable */
+  min-width: 300px;
+  padding-top: 30px;
+  max-width: 600px; /* máximo ancho para que no se estire demasiado */
+}
