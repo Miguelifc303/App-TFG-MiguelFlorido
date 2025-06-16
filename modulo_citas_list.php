@@ -142,13 +142,13 @@
                 </tr>
             <?php
             $estado_cita = '';
-            if ($cita['estado_solicitud'] == 'pendiente') {
-                $estado_cita = 'Pendiente';
-            } elseif ($cita['estado_solicitud'] == 'confirmada' ) {
-                $estado_cita = 'En revisión';
-            }elseif ($cita['estado_cita'] == 'Finalizada') {
-                $estado_cita = 'Finalizada';
-            }
+if ($cita['estado_cita'] === 'Finalizada') {
+    $estado_cita = 'Finalizada';
+} elseif ($cita['estado_solicitud'] === 'pendiente') {
+    $estado_cita = 'Pendiente';
+} elseif ($cita['estado_solicitud'] === 'confirmada') {
+    $estado_cita = 'En revisión';
+}
             $excel .= '<tr>';
             $excel .= '<td>' . $cita["id_solicitud"] . '</td>';
             $excel .= '<td>' . $cita["cliente"] . '</td>';
