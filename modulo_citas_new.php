@@ -30,7 +30,7 @@ $clientes = getClientes();?>
                             <select name="cliente" id="cliente" class="form-control select2" required>
                             <option value="">-- Seleccione un cliente --</option>
                             <?php foreach ($clientes as $cliente): ?>
-                                <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?></option>
+                                <option value="<?= $cliente['id'] ?>"><?= $cliente['nombre'] ?>&nbsp;// &nbsp;<?= $cliente['email'] ?></option>
                             <?php endforeach; ?>
                             </select>
                         </div>

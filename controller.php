@@ -382,7 +382,7 @@ function getClientes() {
     $resultado = array();
 
     // SQL para obtener todos los clientes desde la tabla clientes
-    $sql = "SELECT id, nombre FROM clientes";
+    $sql = "SELECT id, nombre, email FROM clientes";
 
     $query = $mysqli->query($sql);
 
